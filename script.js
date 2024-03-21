@@ -56,10 +56,10 @@ const updateDOM = () => {
         } else {
             // Populate Countdown
             countdownElTitle.textContent = `${countdownTitle}`;
-            timeElements[0].textContent = `${days}`
-            timeElements[1].textContent = `${hours}`
-            timeElements[2].textContent = `${minutes}`
-            timeElements[3].textContent = `${seconds}`
+            timeElements[0].textContent = `${days.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
+            timeElements[1].textContent = `${hours.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
+            timeElements[2].textContent = `${minutes.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
+            timeElements[3].textContent = `${seconds.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
             completeEl.hidden = true;
             countdownEl.hidden = false;
         }
