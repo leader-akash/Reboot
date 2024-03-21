@@ -29,22 +29,25 @@ const today = new Date().toISOString().split('T')[0];
 dateEl.setAttribute('min', today);
 
 // Populate Countdown / Complete UI
+// Populate Countdown / Complete UI
 const updateDOM = () => {
     countdownActive = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = countdownValue - now;
-        // console.log(distance);
+        // Get the current time in UTC
+        const nowUTC = new Date().getTime();
+        
+        // Offset the current time to IST (UTC+5:30)
+        const nowIST = nowUTC + (5.5 * 60 * 60 * 1000);
+
+        const distance = countdownValue - nowIST;
 
         const days = Math.floor(distance / day);
-        const hours = (Math.floor((distance % day) / hour) -5);
-        const minutes = (Math.floor((distance % hour) / minute) - 30);
+        const hours = Math.floor((distance % day) / hour);
+        const minutes = Math.floor((distance % hour) / minute);
         const seconds = Math.floor((distance % minute) / second);
 
-        // console.log(days, hours, minutes, seconds);
-        // hide input
+        // Hide input
         inputContainer.hidden = true;
 
-        // If the countdown has ended, show complete
         if (distance < 0) {
             countdownEl.hidden = true;
             clearInterval(countdownActive);
@@ -61,10 +64,9 @@ const updateDOM = () => {
             countdownEl.hidden = false;
         }
 
-    }, second)
+    }, second);
+};
 
-
-}
 
 // Take Value's from form input
 const updateCountDown = e => {
@@ -109,7 +111,7 @@ function restorePreviousCountdown() {
         inputContainer.hidden = true;
         savedCountdown = JSON.parse(localStorage.getItem('countdown'));
         countdownTitle = 'Reboot 2024';
-        countdownDate = '2024-03-29';
+        countdownDate = '2024-03-22';
         countdownValue = new Date(countdownDate).getTime();
         updateDOM();
 }
