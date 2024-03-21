@@ -111,7 +111,7 @@ function restorePreviousCountdown() {
         inputContainer.hidden = true;
         savedCountdown = JSON.parse(localStorage.getItem('countdown'));
         countdownTitle = 'Reboot 2024';
-        countdownDate = '2024-03-22';
+        countdownDate = '2024-03-29';
         countdownValue = new Date(countdownDate).getTime();
         updateDOM();
 }
