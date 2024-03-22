@@ -34,7 +34,7 @@ const updateDOM = () => {
     countdownActive = setInterval(() => {
         // Get the current time in UTC
         const nowUTC = new Date().getTime();
-        
+
         // Offset the current time to IST (UTC+5:30)
         const nowIST = nowUTC + (5.5 * 60 * 60 * 1000);
 
@@ -56,10 +56,15 @@ const updateDOM = () => {
         } else {
             // Populate Countdown
             countdownElTitle.textContent = `${countdownTitle}`;
-            timeElements[0].textContent = `${days.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
+            timeElements[0].textContent = ` ${days.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
             timeElements[1].textContent = `${hours.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
             timeElements[2].textContent = `${minutes.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
             timeElements[3].textContent = `${seconds.toString().padStart(2, '0')}`; // pad with leading zeros if necessary
+            // Add colons between time elements
+            for (let i = 0; i < timeElements.length - 1; i++) {
+                timeElements[i].textContent += ' :';
+            }
+
             completeEl.hidden = true;
             countdownEl.hidden = false;
         }
@@ -108,12 +113,12 @@ function reset() {
 function restorePreviousCountdown() {
     console.log('==========');
     //Get countdown from localstorage if available
-        inputContainer.hidden = true;
-        savedCountdown = JSON.parse(localStorage.getItem('countdown'));
-        countdownTitle = 'Reboot 2024';
-        countdownDate = '2024-03-29';
-        countdownValue = new Date(countdownDate).getTime();
-        updateDOM();
+    inputContainer.hidden = true;
+    savedCountdown = JSON.parse(localStorage.getItem('countdown'));
+    countdownTitle = 'Reboot 2024';
+    countdownDate = '2024-03-29';
+    countdownValue = new Date(countdownDate).getTime();
+    updateDOM();
 }
 
 // Event Listners
